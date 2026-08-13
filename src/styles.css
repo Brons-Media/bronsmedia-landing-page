@@ -151,3 +151,21 @@
     color: var(--color-foreground);
   }
 }
+
+@theme inline {
+  --font-sans:
+    "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --color-hero-overlay: var(--gradient-hero);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+  .hero-overlay {
+    background: var(--gradient-hero);
+  }
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+}
