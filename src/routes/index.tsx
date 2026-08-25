@@ -76,7 +76,7 @@ function Index() {
         <img
           src={boxing.url}
           alt="Ett team från Brons Media coachar en företagsledare i ringen"
-          className="absolute inset-0 h-full w-full object-cover object-right"
+          className="absolute inset-0 h-full w-full object-contain object-center"
         />
         <div className="hero-overlay absolute inset-0" />
         <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-36 md:pb-32 md:pt-48">
