@@ -5,6 +5,9 @@ import boxing from "@/assets/boxing.jpg.asset.json";
 import f1 from "@/assets/f1.jpg.asset.json";
 import climbing from "@/assets/climbing.jpg.asset.json";
 
+const assetOrigin = "https://id-preview--d581da03-2ba0-436a-bcb4-d5b699a18920.lovable.app";
+const assetUrl = (url: string) => new URL(url, assetOrigin).href;
+
 const deliverables = [
   {
     title: "Målgruppsanalys",
@@ -36,7 +39,7 @@ export default function App() {
     <main className="min-h-screen bg-background text-foreground">
       <header className="absolute inset-x-0 top-0 z-20">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-          <img src={logo.url} alt="Brons Media" className="h-8 w-auto md:h-10" />
+          <img src={assetUrl(logo.url)} alt="Brons Media" className="h-8 w-auto md:h-10" />
           <a
             href="#kontakt"
             className="hidden rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary md:inline-flex"
@@ -49,7 +52,7 @@ export default function App() {
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
         <img
-          src={boxing.url}
+          src={assetUrl(boxing.url)}
           alt="Ett team från Brons Media coachar en företagsledare i ringen"
           className="absolute inset-0 h-full w-full object-contain object-center"
         />
@@ -128,19 +131,19 @@ export default function App() {
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {[
               {
-                img: f1.url,
+                img: assetUrl(f1.url),
                 alt: "Depåstopp där ett team byter däck på en formelbil",
                 t: "Sociala medier",
                 d: "Meta och LinkedIn med annonser byggda för respektive plattforms logik.",
               },
               {
-                img: climbing.url,
+                img: assetUrl(climbing.url),
                 alt: "Klättrare säkrar en företagsledare på en klippvägg i solnedgång",
                 t: "Programmatiska köp",
                 d: "Display, video och native mot precisa segment i realtid.",
               },
               {
-                img: boxing.url,
+                img: assetUrl(boxing.url),
                 alt: "Team i boxningsring kring en företagsledare",
                 t: "Kreativ produktion",
                 d: "Koncept och material som håller genom hela kampanjen.",
@@ -223,7 +226,7 @@ export default function App() {
 
       <footer className="border-t border-border py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-start gap-4 px-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <img src={logo.url} alt="Brons Media" className="h-7 w-auto" />
+          <img src={assetUrl(logo.url)} alt="Brons Media" className="h-7 w-auto" />
           <p>© {new Date().getFullYear()} Brons Media. Mediabyrån som tar dig genom bruset.</p>
         </div>
       </footer>
