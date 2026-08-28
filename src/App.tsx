@@ -1,9 +1,9 @@
 import { ArrowRight, XCircle } from "lucide-react";
 
-import logo from "@/assets/logo-neg.png.asset.json";
-import boxing from "@/assets/boxing.jpg.asset.json";
-import f1 from "@/assets/f1.jpg.asset.json";
-import climbing from "@/assets/climbing.jpg.asset.json";
+import logo from "@/assets/logo-neg-png.asset.json";
+import boxing from "@/assets/boxing-jpg.asset.json";
+import f1 from "@/assets/f1-jpg.asset.json";
+import climbing from "@/assets/climbing-jpg.asset.json";
 
 const assetOrigin = "https://id-preview--d581da03-2ba0-436a-bcb4-d5b699a18920.lovable.app";
 const assetUrl = (url: string) => new URL(url, assetOrigin).href;
