@@ -1,5 +1,7 @@
 # BronsMedia Landing Page
 
+HEJ LINUS
+
 Skapa en ladningssida åt bronsmedia så att man tror att man är på Brons Medias hemsida. bronsmedia.se se även tidigare projekt Bronsmedias hemsida. Skapa en landningsida som svarar på bifogad annons så att det blir rätt content. Annosen skall annonseras på meta, @connector:linkedin:"LinkedIn" och digitala köp programmatiskt
 
 This project was built with [Lovable](https://lovable.dev).
