@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, XCircle } from "lucide-react";
 
-import logo from "@/assets/logo-neg.png.asset.json";
-import boxing from "@/assets/boxing.jpg.asset.json";
-import f1 from "@/assets/f1.jpg.asset.json";
-import climbing from "@/assets/climbing.jpg.asset.json";
+import logo from "@/assets/logo-neg-png.asset.json";
+import boxing from "@/assets/boxing-jpg.asset.json";
+import f1 from "@/assets/f1-jpg.asset.json";
+import climbing from "@/assets/climbing-jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
