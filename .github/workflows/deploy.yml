@@ -31,6 +31,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.BM_SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.BM_SSH_HOST }}
           REMOTE_USER: ${{ secrets.BM_SSH_USER }}
+          PORT: 2020
           TARGET: "/home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/releases/${{ github.event.repository.name }}/${{ github.sha }}"
           SOURCE: "dist/"
           ARGS: "-rltgoDz --delete"
