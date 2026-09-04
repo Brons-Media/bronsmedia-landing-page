@@ -42,5 +42,6 @@ jobs:
           host: ${{ secrets.BM_SSH_HOST }}
           username: ${{ secrets.BM_SSH_USER }}
           key: ${{ secrets.BM_SSH_PRIVATE_KEY }}
+          port: 2020
           script: |
             ln -sfn /home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/releases/${{ github.event.repository.name }}/${{ github.sha }} /home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/${{ github.event.repository.name }}
