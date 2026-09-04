@@ -1,0 +1,52 @@
+name: Deploy med Symlink till Inleed
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hämta koden
+        uses: actions/checkout@v4
+
+      - name: Installera Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installera och bygg
+        run: |
+          npm install
+          npm run build
+
+      - name: Ladda upp nya versionen via SFTP/Rsync
+        uses: easingthemes/ssh-deploy@v5.0.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDz --delete"
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          # Laddar upp till en egen mapp döpt efter commit-SHA:
+          TARGET: "/home/ditt-anvandarnamn/public_html/${{ github.event.repository.name }}/releases/${{ github.sha }}"
+          SOURCE: "dist/"
+
+      - name: Peka om symlänken på Inleed
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Sökvägar på servern
+            REPO_DIR="/home/ditt-anvandarnamn/public_html/${{ github.event.repository.name }}"
+            RELEASE_DIR="$REPO_DIR/releases/${{ github.sha }}"
+            SYMLINK="$REPO_DIR/current"
+
+            # Skapa/uppdatera symlänken så att den pekar på den nya versionen
+            ln -sfn $RELEASE_DIR $SYMLINK
+
+            # (Valfritt) Spara bara de 5 senaste versionerna och städa bort äldre
+            cd $REPO_DIR/releases && ls -t | tail -n +6 | xargs rm -rf
