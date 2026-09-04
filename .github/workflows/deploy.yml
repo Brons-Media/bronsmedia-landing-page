@@ -29,8 +29,8 @@ jobs:
           ARGS: "-rltgoDz --delete"
           REMOTE_HOST: ${{ secrets.BM_SSH_HOST }}
           REMOTE_USER: ${{ secrets.BM_SSH_USER }}
-          # Laddar upp till en egen mapp döpt efter commit-SHA:
-          TARGET: "/home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/${{ github.event.repository.name }}/releases/${{ github.sha }}"
+          # Laddar upp till: kampanj/releases/reponame/commit-sha
+          TARGET: "/home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/releases/${{ github.event.repository.name }}/${{ github.sha }}"
           SOURCE: "dist/"
 
       - name: Peka om symlänken på Inleed
@@ -40,13 +40,14 @@ jobs:
           username: ${{ secrets.BM_SSH_USER }}
           key: ${{ secrets.BM_SSH_PRIVATE_KEY }}
           script: |
-            # Sökvägar på servern
-            REPO_DIR="/home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/${{ github.event.repository.name }}"
-            RELEASE_DIR="$REPO_DIR/releases/${{ github.sha }}"
-            SYMLINK="$REPO_DIR/current"
+            BASE_DIR="/home/bronsmedia/domains/bronsmedia.se/public_html/kampanj"
+            REPO_NAME="${{ github.event.repository.name }}"
+            
+            RELEASE_DIR="$BASE_DIR/releases/$REPO_NAME/${{ github.sha }}"
+            SYMLINK="$BASE_DIR/$REPO_NAME"
 
-            # Skapa/uppdatera symlänken så att den pekar på den nya versionen
+            # 1. Skapa symlänken direkt i /kampanj/ mappen (kampanj/reponame -> releases/reponame/sha)
             ln -sfn $RELEASE_DIR $SYMLINK
 
-            # (Valfritt) Spara bara de 5 senaste versionerna och städa bort äldre
-            cd $REPO_DIR/releases && ls -t | tail -n +6 | xargs rm -rf
+            # 2. Städa gamla versioner (sparar de 5 senaste)
+            cd $BASE_DIR/releases/$REPO_NAME && ls -t | tail -n +6 | xargs -r rm -rf
