@@ -30,7 +30,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.BM_SSH_HOST }}
           REMOTE_USER: ${{ secrets.BM_SSH_USER }}
           # Laddar upp till en egen mapp döpt efter commit-SHA:
-          TARGET: "/home/bronsmedia/domains/bronsmedia.se/public_html/${{ github.event.repository.name }}/releases/${{ github.sha }}"
+          TARGET: "/home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/${{ github.event.repository.name }}/releases/${{ github.sha }}"
           SOURCE: "dist/"
 
       - name: Peka om symlänken på Inleed
@@ -41,7 +41,7 @@ jobs:
           key: ${{ secrets.BM_SSH_PRIVATE_KEY }}
           script: |
             # Sökvägar på servern
-            REPO_DIR="/home/bronsmedia/domains/bronsmedia.se/public_html/${{ github.event.repository.name }}"
+            REPO_DIR="/home/bronsmedia/domains/bronsmedia.se/public_html/kampanj/${{ github.event.repository.name }}"
             RELEASE_DIR="$REPO_DIR/releases/${{ github.sha }}"
             SYMLINK="$REPO_DIR/current"
 
