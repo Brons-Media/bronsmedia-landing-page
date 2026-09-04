@@ -25,23 +25,23 @@ jobs:
       - name: Ladda upp nya versionen via SFTP/Rsync
         uses: easingthemes/ssh-deploy@v5.0.0
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.BM_SSH_PRIVATE_KEY }}
           ARGS: "-rltgoDz --delete"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
+          REMOTE_HOST: ${{ secrets.BM_SSH_HOST }}
+          REMOTE_USER: ${{ secrets.BM_SSH_USER }}
           # Laddar upp till en egen mapp döpt efter commit-SHA:
-          TARGET: "/home/ditt-anvandarnamn/public_html/${{ github.event.repository.name }}/releases/${{ github.sha }}"
+          TARGET: "/home/bronsmedia/domains/bronsmedia.se/public_html/${{ github.event.repository.name }}/releases/${{ github.sha }}"
           SOURCE: "dist/"
 
       - name: Peka om symlänken på Inleed
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.BM_SSH_HOST }}
+          username: ${{ secrets.BM_SSH_USER }}
+          key: ${{ secrets.BM_SSH_PRIVATE_KEY }}
           script: |
             # Sökvägar på servern
-            REPO_DIR="/home/ditt-anvandarnamn/public_html/${{ github.event.repository.name }}"
+            REPO_DIR="/home/bronsmedia/domains/bronsmedia.se/public_html/${{ github.event.repository.name }}"
             RELEASE_DIR="$REPO_DIR/releases/${{ github.sha }}"
             SYMLINK="$REPO_DIR/current"
 
